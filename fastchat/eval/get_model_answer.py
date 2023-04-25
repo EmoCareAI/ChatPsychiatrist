@@ -30,7 +30,7 @@ def run_eval(model_path, model_id, question_file, answer_file, num_gpus):
 
     with open(os.path.expanduser(answer_file), "w") as ans_file:
         for line in ans_jsons:
-            ans_file.write(json.dumps(line) + "\n")
+            ans_file.write(json.dumps(line, ensure_ascii=False) + "\n")
 
 
 @ray.remote(num_gpus=1)

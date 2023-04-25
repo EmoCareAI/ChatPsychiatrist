@@ -28,6 +28,11 @@ from transformers.trainer_pt_utils import LabelSmoother
 from fastchat.conversation import get_default_conv_template, SeparatorStyle
 
 IGNORE_TOKEN_ID = LabelSmoother.ignore_index
+IGNORE_INDEX = -100
+DEFAULT_PAD_TOKEN = "[PAD]"
+DEFAULT_EOS_TOKEN = "</s>"
+DEFAULT_BOS_TOKEN = "</s>"
+DEFAULT_UNK_TOKEN = "</s>"
 
 
 @dataclass
@@ -212,6 +217,29 @@ def make_supervised_data_module(tokenizer: transformers.PreTrainedTokenizer,
                 eval_dataset=None)
 
 
+def smart_tokenizer_and_embedding_resize(
+    special_tokens_dict: Dict,
+    tokenizer: transformers.PreTrainedTokenizer,
+    model: transformers.PreTrainedModel,
+):
+    """Resize tokenizer and embedding.
+
+    Note: This is the unoptimized version that may make your embedding size not be divisible by 64.
+    """
+    num_new_tokens = tokenizer.add_special_tokens(special_tokens_dict)
+    model.resize_token_embeddings(len(tokenizer))
+
+    if num_new_tokens > 0:
+        input_embeddings = model.get_input_embeddings().weight.data
+        output_embeddings = model.get_output_embeddings().weight.data
+
+        input_embeddings_avg = input_embeddings[:-num_new_tokens].mean(dim=0, keepdim=True)
+        output_embeddings_avg = output_embeddings[:-num_new_tokens].mean(dim=0, keepdim=True)
+
+        input_embeddings[-num_new_tokens:] = input_embeddings_avg
+        output_embeddings[-num_new_tokens:] = output_embeddings_avg
+
+
 def train():
     global local_rank
 
@@ -230,7 +258,21 @@ def train():
         padding_side="right",
         use_fast=False,
     )
-    tokenizer.pad_token = tokenizer.unk_token
+    
+    if tokenizer.pad_token is None:
+        smart_tokenizer_and_embedding_resize(
+            special_tokens_dict=dict(pad_token=DEFAULT_PAD_TOKEN),
+            tokenizer=tokenizer,
+            model=model,
+        )
+    if "llama" in model_args.model_name_or_path:
+        tokenizer.add_special_tokens({
+            "eos_token": DEFAULT_EOS_TOKEN,
+            "bos_token": DEFAULT_BOS_TOKEN,
+            "unk_token": DEFAULT_UNK_TOKEN,
+        })
+    
+    # tokenizer.pad_token = tokenizer.unk_token
 
     data_module = make_supervised_data_module(tokenizer=tokenizer,
                                               data_args=data_args)

@@ -9,5 +9,9 @@ replace_llama_attn_with_flash_attn()
 
 from fastchat.train.train import train
 
+# turn off wandb
+import os
+os.environ["WANDB_DISABLED"] = "true" 
+
 if __name__ == "__main__":
     train()

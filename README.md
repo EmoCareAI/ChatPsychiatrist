@@ -8,7 +8,7 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](LICENSE)
 
-Introducing our project, the ChatPsychiatrist—a transformative solution in the field of mental health support. We aim to address the delays in traditional psychiatric and counseling services by providing early-stage assistance and effective interventions. Utilizing LLMs, the ChatPsychiatrist swiftly identifies individual issues and offers tailored treatment recommendations. With an adaptive communication style, it becomes a powerful and free tool to provide personalized mental health support to users in need.
+Introducing our project, the **ChatPsychiatrist**—a transformative solution in the field of mental health support. We aim to address the delays in traditional psychiatric and counseling services by providing early-stage assistance and effective interventions. Utilizing LLMs, the ChatPsychiatrist swiftly identifies individual issues and offers tailored treatment recommendations. With an adaptive communication style, it becomes a powerful and free tool to provide personalized mental health support to users in need.
 
 This repo open-sources the Instruct-tuned LLaMA-7B model that has been fine-tuned with counseling domian instruction data. To construct our 8K size instruct-tuning dataset, we collected real-world counseling dialogue examples and employed GPT-4 as an extractor and filter. In addition, we have introduced a comprehensive set of metrics, specifically tailored to the LLM+Counseling domain, by incorporating counseling domain evaluation criteria. These metrics enable the assessment of performance in generating language content that involves multi-dimensional counseling skills. The brief pipeline is shown below:
 <div align="center">
@@ -25,7 +25,14 @@ pip3 install -r requirements.txt
 ```
 
 ## ⏬ Model Download
-We provide the weights hold on [Huggingface](https://huggingface.co/EmoCareAI/ChatPsychiatrist). You can download the model weights using [Huggingface Client Library](https://huggingface.co/docs/hub/models-downloading#using-the-hugging-face-client-library).
+We provide the weights hold on [Huggingface](https://huggingface.co/EmoCareAI/ChatPsychiatrist). You can download the model weights using [Huggingface Client Library](https://huggingface.co/docs/hub/models-downloading#using-the-hugging-face-client-library). Or use the following wget script:
+```bash
+mkdir -P PATH_TO_WEIGHTS_DIR && cd PATH_TO_WEIGHTS_DIR
+user='EmoCareAI'
+repo='ChatPsychiatrist'
+curl "https://huggingface.co/${user}/${repo}/tree/main" | grep -o 'href="[^"]*"' | cut -d'"' -f2 | grep "^/${user}/${repo}/blob/main/" | sed "s|^|https://huggingface.co|; s|/blob/|/resolve/|g" > files.txt && wget -nc -i files.txt && rm files.txt
+cd ..
+```
 
 
 ## 🚀 Inference
@@ -100,7 +107,7 @@ Here is the comparison between the performance of our chatbot and other large la
 ## Counselling Bench 
 We have designed 229 queries specifically to evaluate the performance of chatbots in counseling scenarios. The current benchmark comprises a challenging set of single-turn open-ended questions, providing a rigorous evaluation of chat assistance capabilities.  
 
-Please check [counseliing bench questions](fastchat/llm_judge/data/counselling_bench/question.jsonl) for reference. You can evaluate using the following command:
+Please check the subset santitised part [counseliing bench questions](fastchat/llm_judge/data/counselling_bench/Sanitised_CounsQs_subset.jsonl) for reference. You can evaluate using the following command:
 ```bash
 python3 -m fastchat.llm.judge.gen_model_answer \
   --model-id chatpsychiatrist \
@@ -119,7 +126,7 @@ The evaluation metrics are derived from the following categories:
 6. **Self-disclosure**: Quantifies the chatbot's ability to share relevant information about itself.
 7. **Obtain Relevant Information**: Evaluates the capability to ask appropriate questions to gather necessary details.
 
-See xxx for details on the metrics' definition and example phrases.
+See [Evaluation Definetion](docs/Evaluation_definetion.md) for details on the metrics' definition and example phrases.
 
 ## Comparison with Other Large Language Models
 

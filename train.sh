@@ -1,7 +1,7 @@
 #!/bin/bash
 torchrun --nproc_per_node=8 --master_port=20001 fastchat/train/train_mem.py \
     --model_name_or_path weights/vicuna-7b-v1.3 \
-    --data_path data/psych8k.json \
+    --data_path PSYCH8K_DATA \
     --bf16 True \
     --output_dir chatpsych \
     --num_train_epochs 5 \

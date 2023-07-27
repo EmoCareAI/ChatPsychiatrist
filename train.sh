@@ -23,6 +23,3 @@ torchrun --nproc_per_node=8 --master_port=20001 fastchat/train/train_mem.py \
     --model_max_length 2048 \
     --gradient_checkpointing True \
     --lazy_preprocess True
-
-# #For evaluation
-# python gen_model_answer.py --model-id psych8k_7b_5ep --model-path /comp_robot/rentianhe/caohe/FastChat/weights/chatpsych --bench-name counselling_bench 

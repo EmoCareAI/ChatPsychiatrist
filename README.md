@@ -13,6 +13,7 @@
   </figure>
 </div>
 
+
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](LICENSE)
 
 Introducing our project, the **ChatPsychiatrist**—a transformative solution in the field of mental health support. We aim to address the delays in traditional psychiatric and counseling services by providing early-stage assistance and effective interventions. Utilizing LLMs, the ChatPsychiatrist swiftly identifies individual issues and offers tailored treatment recommendations. With an adaptive communication style, it becomes a powerful and free tool to provide personalized mental health support to users in need.
@@ -21,7 +22,6 @@ This repo open-sources the Instruct-tuned LLaMA-7B model that has been fine-tune
 <div align="center">
   <figure>
     <img src="assets/pipeline.png" width="80%"/>
-    <figcaption>Overview Pipeline</figcaption>
   </figure>
 </div>
 
@@ -79,12 +79,11 @@ See details refer to [FastChat Web GUI Serving](https://github.com/lm-sys/FastCh
 # Data
 ### Data Source
 
-The data used for this project comes from ~260 real conversations in counseling recordings (in English). The transcripts of these recordings were used as the primary source for building the training and testing datasets. These conversations cover a variety of topics, including *emotion*, *family*, *relationship*, *career development*, *academic stress*, etc. This figure shows the coverage:
+The data used for this project comes from ~260 real conversations in counseling recordings (in English). The transcripts of these recordings were used as the primary source for building the training and testing datasets. These conversations cover a variety of topics, including *emotion*, *family*, *relationship*, *career development*, *academic stress*, etc. This figure below shows the distribution of mental health-related topics in Psych8K. (The inner circle represents 5 major categories, and the outer group represents minor topics)
 
 <div align="center">
     <figure>
         <img src="assets/Topic_Coverage.png" width = "520" height = "450" alt="topic_coverage"/>
-        <figcaption>The distribution of mental health-related topics in Psych8K. The inner circle represents 5 major categories, and the outer group represents minor topics</figcaption>
     </figure>
 </div>
 
@@ -152,10 +151,10 @@ See [Evaluation Definetion](docs/Evaluation_definetion.md) for details on the me
 In the figure below, we compare the performance of our LLM chatbot with other models (evaluated by GPT-4). The scores in each category represent the effectiveness of the chatbot in that particular aspect.
 
 <!-- ![](assets/single_turn_comparison_GPT4-score.jpg) -->
+* Comparison of single-turn evaluation scores between our LLM chatbot and other models (evaluated by GPT-4)
 <div align="center">
     <figure>
         <img src="assets/single_turn_GPT4_eval.png" alt="single_turn_comparison_GPT4-score"/>
-        <figcaption>Comparison of single-turn evaluation scores between our LLM chatbot and other models (evaluated by GPT-4)</figcaption>
     </figure>
 </div>
 

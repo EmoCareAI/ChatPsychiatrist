@@ -15,6 +15,7 @@
 
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](LICENSE)
+[![arXiv](https://img.shields.io/badge/arXiv-2208.01618-b31b1b.svg)](https://arxiv.org/abs/2309.15461)
 
 Introducing our project, the **ChatPsychiatrist**—a transformative solution in the field of mental health support. We aim to address the delays in traditional psychiatric and counseling services by providing early-stage assistance and effective interventions. Utilizing LLMs, the ChatPsychiatrist swiftly identifies individual issues and offers tailored treatment recommendations. With an adaptive communication style, it becomes a powerful and free tool to provide personalized mental health support to users in need.
 
@@ -26,7 +27,7 @@ This repo open-sources the Instruct-tuned LLaMA-7B model that has been fine-tune
 </div>
 
 # Updates
-- [2023-9-26] Our paper "ChatCounselor: A Large Language Models for Mental Health Support" has been accepted by PGAI CIKM 2023.
+- [2023-9-26] Our paper ["ChatCounselor: A Large Language Models for Mental Health Support"](https://arxiv.org/abs/2309.15461) has been accepted by PGAI CIKM 2023.
 - [2023-7-28] First release of ChatPsychiatrist. We open-source the Instruct-tuned LLaMA-7B model that has been fine-tuned with counseling domian instruction data.
 
 # Quick Start
@@ -170,6 +171,15 @@ This project has referred the following open-source projects. We would like to e
 # Citation
 If you use the data or code from this project, please declare the reference:
 ```
+@misc{liu2023chatcounselor,
+      title={ChatCounselor: A Large Language Models for Mental Health Support}, 
+      author={June M. Liu and Donghao Li and He Cao and Tianhe Ren and Zeyi Liao and Jiamin Wu},
+      year={2023},
+      eprint={2309.15461},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
 @misc{ChatPsychiatrist2023,
     author={EmoCareAI},
     title={ChatPsychiatrist},

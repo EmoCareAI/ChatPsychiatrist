@@ -27,6 +27,7 @@ This repo open-sources the Instruct-tuned LLaMA-7B model that has been fine-tune
 </div>
 
 # Updates
+- [2024-3-12] Our Psych8k dataset can be accessed through [huggingface](https://huggingface.co/datasets/EmoCareAI/Psych8k)
 - [2023-9-26] Our paper ["ChatCounselor: A Large Language Models for Mental Health Support"](https://arxiv.org/abs/2309.15461) has been accepted by PGAI CIKM 2023.
 - [2023-7-28] First release of ChatPsychiatrist. We open-source the Instruct-tuned LLaMA-7B model that has been fine-tuned with counseling domian instruction data.
 
